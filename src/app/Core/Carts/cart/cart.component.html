@@ -1,0 +1,44 @@
+<div class="cartBox">
+    <h1>Clients order</h1>
+    <form class="mb-4 mt-3" [formGroup]="cartForm">
+        <div class="row">
+            <div class="col-md-3">
+                <label for="">Start Date</label>
+                <input type="date" class="form-control" formControlName="start">
+            </div>
+            <div class="col-md-3">
+                <label for="">End Date</label>
+                <input type="date" class="form-control" formControlName="end">
+            </div>
+            <div class="col-md-2 d-flex align-items-end">
+                <button class="btn btn-success mx-1" (click)="applyFilter()">Apply</button>
+                <button class="btn btn-outline-secondary" (click)="resetFilter()">Reset</button>
+            </div>
+        </div>
+    </form>
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Date</th>
+                <th>Quantity</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (cartData.length > 1) {
+            <tr *ngFor="let product of cartData; let index = index">
+                <td>{{ product.date | date:'yyyy-MM-dd HH:mm:ss' }}</td>
+                <td>{{product.products.length}}</td>
+                <td class="d-flex justify-content-center gap-2 flex-wrap">
+                    <p-button severity="primary" (click)="show(product.products)" icon="pi pi-search" label="View order products" />
+                    <button class="btn btn-danger" (click)="deleteCartProduct(product.id)">Delete</button>
+                </td>
+            </tr>
+            } @else {
+            <tr>No data in this date</tr>
+            }
+        </tbody>
+    </table>
+</div>
+<app-spinner *ngIf="isSpinner" />
+<p-toast position="bottom-right" />

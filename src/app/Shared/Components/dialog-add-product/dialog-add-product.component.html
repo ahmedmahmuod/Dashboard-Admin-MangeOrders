@@ -1,0 +1,48 @@
+<p-dialog [(visible)]="visible" header="{{ actionType === 'add' ? 'Add New Product' : 'Update Product' }}"
+    [modal]="true" [closable]="false" [style]="{'width': '70%'}" [draggable]="false">
+    <div class="container p-4">
+        <form [formGroup]="form">
+            <div class="row">
+                <div class="col-md-4 form-group">
+                    <label for="title">Product Title</label>
+                    <input id="title" pInputText class="form-control mb-3" formControlName="title" />
+                </div>
+                <div class="col-md-4 form-group">
+                    <label for="price">Product Price</label>
+                    <input id="price" type="number" pInputText class="form-control mb-3" formControlName="price" />
+                </div>
+                <div class="col-md-4 form-group">
+                    <label for="image">Product Image</label>
+                    <input (change)="getImgPath($event)" type="file" id="image" class="form-control mb-3" />
+                    <img *ngIf="form.get('image')?.value || base64" width="50px" height="50px"
+                        [src]="form.get('image')?.value || base64" />
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-4 form-group">
+                    <label for="description">Product Description</label>
+                    <textarea id="description" pInputTextarea class="form-control mb-3" formControlName="description"
+                        rows="4"></textarea>
+                </div>
+                <div *ngIf="actionType === 'add'" class="col-md-4 form-group">
+                    <label for="quantity">Product Count</label>
+                    <input min="1" id="quantity" type="number" pInputText class="form-control mb-3"
+                        formControlName="quantity" />
+                </div>
+                <div class="col-md-4 form-group">
+                    <app-select-dom [all]="false" (selectedValue)="getSelectCategory($event)" [label]="'Categories'"
+                        [data]="allCategories" />
+                </div>
+            </div>
+
+            <div class="d-flex justify-content-end mt-3 gap-2">
+                <p-button label="Cancel" icon="pi pi-times" (click)="onClose()" class="p-button-text w-45"></p-button>
+                <p-button
+                    [disabled]="!form.valid || form.get('category')?.value === 'select' || form.get('category')?.value === ''"
+                    label="{{ actionType === 'add' ? 'Add Product' : 'Update Product' }}" icon="pi pi-check"
+                    class="p-button-text w-45" (click)="onSubmit()"></p-button>
+            </div>
+        </form>
+    </div>
+</p-dialog>

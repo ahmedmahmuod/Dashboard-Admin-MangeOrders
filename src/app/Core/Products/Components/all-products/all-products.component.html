@@ -1,0 +1,17 @@
+<div class="box">
+    <div class="my-2 mb-5 d-flex justify-content-between align-items-center">
+        <app-select-dom [all]="true" [label]="'Categories'" [data]="allCategories" (selectedValue)="getProductByCategory($event)" />
+        <div class="card flex justify-center">
+            <div class="card flex justify-center">
+                <button class="btn btn-success" (click)="visible = true">Add New Product</button>
+                <app-dialog-add-product [actionType]="actionType" [visible]="visible" [allCategories]="allCategories"
+                    (closeDialog)="onCloseDialog($event)" (productSubmitted)="addNewProduct($event)" />
+            </div>
+        </div>
+    </div>
+    <div class="products">
+        <app-product *ngFor="let product of allProducts;" class="product" [productData]="product" />
+    </div>
+</div>
+<app-spinner *ngIf="isSpinner" />
+<p-toast position="bottom-left" />

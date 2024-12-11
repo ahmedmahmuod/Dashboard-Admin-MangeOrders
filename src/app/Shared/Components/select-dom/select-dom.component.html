@@ -1,0 +1,6 @@
+<label class="my-1">{{label}}:</label>
+<select (change)="sendValueSelected($event)" class="form-control">
+    <option *ngIf="all" value="all">All</option>
+    <option *ngIf="!all" value="">Select Category</option>
+    <option *ngFor="let category of data" [value]="category">{{category}}</option>
+</select>

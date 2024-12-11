@@ -1,0 +1,35 @@
+<table class="table table-bordered table-striped">
+    <thead class="thead-light">
+        <tr>
+            <th class="text-center">Image</th>
+            <th class="text-center w-25">Name</th>
+            <th class="text-center">Category</th>
+            <th class="text-center">Price</th>
+            <th class="text-center">Details</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td class="text-center align-middle">
+                <div class="d-flex justify-content-center align-items-center" style="height: 100px;">
+                    <img alt="Card" [src]="productData.image" class="img-thumbnail" width="50px" />
+                </div>
+            </td>
+            <td class="text-center align-middle">{{ productData.title }}</td>
+            <td class="text-center align-middle">{{ productData.category }}</td>
+            <td class="text-center align-middle">{{ productData.price }} L.E</td>
+            <td class="text-center align-middle w-25">
+                <div class="d-flex flex-column gap-2">
+                    <a (click)="editProduct()" class="btn btn-warning text-white">Update Product</a>
+                    <a [routerLink]="['/products', productData.id, 'details']" class="btn btn-primary">View Product</a>
+                    <a (click)="onDeleteProduct(productData.id)" class="btn btn-danger">Delete Product</a>
+                    <app-dialog-add-product [actionType]="actionType" [productData]="productData" [visible]="visible"
+                        [allCategories]="allCategories" (closeDialog)="onCloseDialog($event)"
+                        (productSubmitted)="onEditProduct($event)" />
+                </div>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<app-spinner *ngIf="isSpinner" />
+<p-toast position="bottom-left" />

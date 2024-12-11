@@ -1,0 +1,25 @@
+.cartBox {
+    border: 1px solid #DDD;
+    border-radius: 5px;
+    padding: 0px 20px;
+    margin: 100px 0px 26px 0px;
+    .table {
+        thead {
+            border-top: 1px solid #c61d21;
+            tr {
+                text-align: center;
+            }
+        }
+        tbody {
+            border-bottom: 1px solid #c61d21;
+            tr {
+                td {
+                    border-bottom: 0;
+                    vertical-align: middle;
+                    text-align: center;
+
+                }
+            }
+        }
+    }     
+}

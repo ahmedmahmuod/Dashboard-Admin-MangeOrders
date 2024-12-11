@@ -1,0 +1,23 @@
+<div class="container mt-5">
+    <div class="row justify-content-center align-items-center" style="min-height: 80vh;">
+        <div class="col-md-4 col-sm-12 mb-3"> <!-- تقليل عرض العمود -->
+            <img src="{{ productData.image }}"
+                 class="img-fluid rounded shadow"
+                 alt="{{ productData.title }}"
+                 style="max-height: 400px; width: 100%; object-fit: contain; margin-top: 50px; border-radius: 15px; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);"> <!-- تقليل الارتفاع الأقصى -->
+        </div>
+        <div class="col-md-7 col-sm-12">
+            <div class="info">
+                <h3 class="mb-3">{{ productData.title }}</h3>
+                <ul class="list-unstyled">
+                    <li><strong>Category:</strong> {{ productData.category }}</li>
+                    <li><strong>Description:</strong> {{ productData.description }}</li>
+                    <li><strong>Rate:</strong> {{ productData.rating?.rate }}</li>
+                    <li><strong>Count:</strong> {{ productData.rating?.count }}</li>
+                    <li><strong>Price:</strong> {{ productData.price }} L.E</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <app-spinner *ngIf="loading"></app-spinner>
+</div>
